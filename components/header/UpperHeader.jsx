@@ -39,9 +39,9 @@ function UpperHeader() {
         <div className="flex flex-row space-x-1  items-end ">
           <div className="relative items-center ">
             <ShoppingCartIcon className="h-5 md:h-8 " />
-            <div className=" absolute -top-2 left-2/4 text-greenSecondary text-xl z-10 font-bold ">
+            <span className=" absolute -top-2 left-2/4 text-white text-xs  md:text-sm font-light z-10  bg-greenSecondary p-[1px] md:p-1 rounded-full">
               0
-            </div>
+            </span>
           </div>
           <div className="font-bold hidden md:block">Cart</div>{" "}
         </div>

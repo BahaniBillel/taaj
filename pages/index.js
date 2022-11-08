@@ -1,9 +1,11 @@
 import Head from "next/head";
 import Header from "../components/header/Header";
+import Hero from "../components/hero/Hero";
+import ProductsDisplay from "../components/products/ProductsDisplay";
 // import Image from "next/image";
 import styles from "../styles/Home.module.css";
 
-export default function Home() {
+export default function Home({ products }) {
   return (
     <div className="">
       <Head>
@@ -12,7 +14,24 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <main className="bg-greenSecondary"></main>
+      <main className="">
+        <Hero />
+        <ProductsDisplay products={products} />
+      </main>
     </div>
   );
+}
+
+// importing data from the server
+
+export async function getServerSideProps(context) {
+  const products = await fetch("https://fakestoreapi.com/products").then(
+    (res) => res.json()
+  );
+
+  return {
+    props: {
+      products,
+    },
+  };
 }
