@@ -3,7 +3,7 @@ import Product from "./Product";
 
 function ProductsDisplay({ products }) {
   return (
-    <div className="grid grid-flow-row-dense md:grid-cols-2 lg:grid-cols-5 xl:grid-cols-6  text-sx px-40 -mt-20">
+    <div className="grid grid-flow-row-dense md:grid-cols-2 lg:grid-cols-5 xl:grid-cols-6  text-sx   px-10 md:px-40 -mt-20 ">
       {products.map(({ id, title, price, description, category, image }) => (
         <Product
           key={id}
