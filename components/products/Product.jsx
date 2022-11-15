@@ -28,10 +28,7 @@ function Product({ id, title, price, description, category, image, url }) {
   };
 
   return (
-    <div
-      className="hover:bg-pink-400 hover:transition hover:duration-150 ease-in-out md:h-56
-    hover:ease-out pl-[1px] pr-[1px] pt-[1px] pb-10 m-2 rounded-b-md cursor-pointer group  overflow-hidden grid grid-rows-8 hover:shadow-md hover:scale-105 relative"
-    >
+    <div className="hover:bg-pink-400 hover:transition hover:duration-150 ease-in-out md:h-56 hover:ease-out pl-[1px] pr-[1px] pt-[1px] pb-10 m-2 rounded-b-md cursor-pointer group  overflow-hidden grid grid-rows-8 hover:shadow-md hover:scale-105 relative">
       <div
         className=" relative flex flex-col   bg-white z-30 p-5  space-y-2 group row-span-7  "
         onClick={url}

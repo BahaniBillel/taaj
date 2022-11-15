@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import CheckoutProduct from "../../components/CheckoutProduct";
 import { selectItems } from "../../redux/slices/basketSlice";
 
-function checkout() {
+function Checkout() {
   const items = useSelector(selectItems);
   return (
     <div className="">
@@ -16,4 +16,4 @@ function checkout() {
   );
 }
 
-export default checkout;
+export default Checkout;
