@@ -31,7 +31,7 @@ function ProductDetail({ products }) {
           ))
       ) : (
         <div className="animate-pulse text-2xl text-greenPrimary">
-          Ain't no page here
+          Ain &#39 t no page here
         </div>
       )}
     </div>
