@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import SwitchComp from "../Switch";
+
 import Product from "./Product";
 import { Switch } from "@headlessui/react";
 
