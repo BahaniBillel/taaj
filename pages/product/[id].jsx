@@ -25,7 +25,7 @@ function ProductDetail({ products }) {
         products
           .filter((product) => product.id == id)
           .map((product) => (
-            <div className="grid grid-flow-dense-9 ">
+            <div className="grid grid-flow-dense-9 " key={product.id}>
               <di className="col-span-1 row-span-1">{product.price}</di>
             </div>
           ))

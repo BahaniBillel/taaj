@@ -1,12 +1,27 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { ShoppingBagIcon, HeartIcon } from "@heroicons/react/24/solid";
+import { useDispatch } from "react-redux";
+import { addToBasket } from "../../redux/slices/basketSlice";
 
 function Product({ id, title, price, description, category, image, url }) {
-  const ratingChanged = (newRating) => {
-    console.log(newRating);
-  };
+  const dispatch = useDispatch();
+
   const [heart, setHeart] = useState(false);
+
+  const AddItemToBasket = () => {
+    const product = {
+      id,
+      title,
+      price,
+      description,
+      category,
+      image,
+      url,
+    };
+    // sending the product as an action to REDUX store -> the basket slice
+    dispatch(addToBasket(product));
+  };
 
   const HandleHeartColor = () => {
     setHeart(!heart);
@@ -37,7 +52,10 @@ function Product({ id, title, price, description, category, image, url }) {
         </div>
       </div>
       <div className="mt-auto text-xs   grid   h-10 w-full  grid-cols-2 grid-rows-1    group row-span-1 absolute -bottom-1 z-30 pt-1">
-        <button className="col-span-1 row-span-1 bg-transparent  group-hover:bg-slate-900 group-hover:bg-greenSecondary h-full  hidden group-hover:block hover:scale-95 space-x-6 ">
+        <button
+          className="col-span-1 row-span-1 bg-transparent  group-hover:bg-slate-900 group-hover:bg-greenSecondary h-full  hidden group-hover:block hover:scale-95 space-x-6 "
+          onClick={AddItemToBasket}
+        >
           <div className="flex-grow"></div>
           <ShoppingBagIcon className="h-4 text-white " />
           <div className=" flex-grow"></div>

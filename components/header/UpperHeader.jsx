@@ -1,13 +1,16 @@
 import React from "react";
-
 import {
   MagnifyingGlassIcon,
   ShoppingCartIcon,
   UserCircleIcon,
   Bars3BottomLeftIcon,
 } from "@heroicons/react/24/solid";
+import { useSelector } from "react-redux";
+import { selectItems } from "../../redux/slices/basketSlice";
+import Link from "next/link";
 
 function UpperHeader() {
+  const items = useSelector(selectItems);
   return (
     <div className="bg-darkGray h-auto grid grid-cols-12 grid-flow-row-2 md:grid-rows-1 py-2 px-3 md:px-5 ">
       {/* logo */}
@@ -37,12 +40,14 @@ function UpperHeader() {
         </div>
         {/* cart */}
         <div className="flex flex-row space-x-1  items-end ">
-          <div className="relative items-center ">
-            <ShoppingCartIcon className="h-5 md:h-8 " />
-            <span className=" absolute -top-2 left-2/4 text-white text-xs  md:text-sm font-light z-10  bg-greenSecondary p-[1px] md:p-1 rounded-full">
-              0
-            </span>
-          </div>
+          <Link href="/checkout">
+            <div className="relative items-center ">
+              <ShoppingCartIcon className="h-5 md:h-8 " />
+              <span className=" absolute -top-2 left-2/4 text-white text-xs  md:text-sm font-light z-10  bg-greenSecondary p-[1px] md:p-1 rounded-full">
+                {items.length}
+              </span>
+            </div>
+          </Link>
           <div className="font-bold hidden md:block">Cart</div>{" "}
         </div>
 
