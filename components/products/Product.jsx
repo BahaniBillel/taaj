@@ -3,6 +3,7 @@ import Image from "next/image";
 import { ShoppingBagIcon, HeartIcon } from "@heroicons/react/24/solid";
 import { useDispatch } from "react-redux";
 import { addToBasket } from "../../redux/slices/basketSlice";
+import { incrementLikes, decrementLikes } from "../../redux/slices/heartSlice";
 
 function Product({ id, title, price, description, category, image, url }) {
   const dispatch = useDispatch();
@@ -23,8 +24,22 @@ function Product({ id, title, price, description, category, image, url }) {
     dispatch(addToBasket(product));
   };
 
+  const HandleIncrementedLikes = () => {
+    dispatch(incrementLikes());
+  };
+
+  const HandleDecrementedLikes = () => {
+    dispatch(decrementLikes());
+  };
+
   const HandleHeartColor = () => {
     setHeart(!heart);
+
+    if (heart === true) {
+      dispatch(incrementLikes());
+    } else {
+      dispatch(decrementLikes());
+    }
   };
 
   return (

@@ -4,17 +4,25 @@ import {
   ShoppingCartIcon,
   UserCircleIcon,
   Bars3BottomLeftIcon,
+  HeartIcon,
 } from "@heroicons/react/24/solid";
 import { useSelector } from "react-redux";
 import { selectItems } from "../../redux/slices/basketSlice";
 import Link from "next/link";
+import { selectCounts } from "../../redux/slices/heartSlice";
 
 function UpperHeader() {
   const items = useSelector(selectItems);
+  const likes = useSelector((state) => state.heart.counts);
   return (
     <div className="bg-darkGray h-auto grid grid-cols-12 grid-flow-row-2 md:grid-rows-1 py-2 px-3 md:px-5 ">
       {/* logo */}
-      <div className=" order-1 col-span-6 md:col-span-2 text-white ">logo</div>
+      <Link
+        href="/"
+        className="order-1 col-span-6 md:col-span-2 text-greenSecondary font-bold text-3xl "
+      >
+        TAAJ
+      </Link>
       {/* search bar */}
       <div className=" mt-3 md:mt-0 order-last md:order-2 col-span-12 md:col-span-7 flex flex-row items-center relative overflow-hidden">
         <Bars3BottomLeftIcon className="h-8 text-white mr-4 md:hidden" />
@@ -38,17 +46,28 @@ function UpperHeader() {
           <br />
           <span className="font-bold ">Billel</span>{" "}
         </div>
+        {/* likes */}
+
+        <div className="flex flex-row space-x-1  items-end ">
+          <Link href="/likes">
+            <div className="relative items-center ">
+              <HeartIcon className="h-5 md:h-8 " />
+              <span className=" absolute -top-2 left-2/4 text-white text-xs font-bold   z-10  bg-darkGray py-1 px-2 rounded-full">
+                {likes}
+              </span>
+            </div>
+          </Link>
+        </div>
         {/* cart */}
         <div className="flex flex-row space-x-1  items-end ">
           <Link href="/checkout">
             <div className="relative items-center ">
               <ShoppingCartIcon className="h-5 md:h-8 " />
-              <span className=" absolute -top-2 left-2/4 text-white text-xs  md:text-sm font-light z-10  bg-greenSecondary p-[1px] md:p-1 rounded-full">
+              <span className=" absolute -top-2 left-2/4 text-white text-xs font-bold   z-10  bg-greenSecondary py-1 px-2 rounded-full">
                 {items.length}
               </span>
             </div>
           </Link>
-          <div className="font-bold hidden md:block">Cart</div>{" "}
         </div>
 
         {/* user */}
