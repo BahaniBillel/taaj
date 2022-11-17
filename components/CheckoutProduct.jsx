@@ -1,7 +1,9 @@
 import { StarIcon, TrashIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 import React from "react";
+import { useDispatch } from "react-redux";
 import StarRatings from "react-star-ratings";
+import { addToBasket, removeFromBasket } from "../redux/slices/basketSlice";
 
 function CheckoutProduct({
   id,
@@ -13,6 +15,25 @@ function CheckoutProduct({
   url,
   rating,
 }) {
+  const dispatch = useDispatch();
+  const addItemToBasket = () => {
+    const product = {
+      id,
+      title,
+      price,
+      description,
+      category,
+      image,
+      url,
+      rating,
+    };
+    dispatch(addToBasket(product));
+  };
+
+  const removeItemFromBasket = () => {
+    dispatch(removeFromBasket({ id }));
+  };
+
   return (
     <div
       className="grid grid-cols-5 gap-y-10  border-lightGray border-solid border mb-1 py-2 px-5 h-36 overflow-hidden bg-white cursor-pointer
@@ -59,11 +80,17 @@ function CheckoutProduct({
       <div className="col-span-1  flex flex-col items-end  ">
         <div className="font-semibold text-sm">{price} DA</div>
         <div className="flex flex-row space-x-3 items-center mt-5">
-          <button className="bg-greenSecondary py-1 px-3 rounded-sm text-white hover:scale-95 transition-shadow duration-150">
+          <button
+            className="bg-greenSecondary py-1 px-3 rounded-sm text-white hover:scale-95 transition-shadow duration-150"
+            onClick={removeItemFromBasket}
+          >
             -
           </button>
           <p>0</p>
-          <button className="bg-greenPrimary py-1 px-3 rounded-sm text-white shadow-md hover:scale-95 transition-shadow duration-150">
+          <button
+            className="bg-greenPrimary py-1 px-3 rounded-sm text-white shadow-md hover:scale-95 transition-shadow duration-150"
+            onClick={addItemToBasket}
+          >
             +
           </button>
         </div>

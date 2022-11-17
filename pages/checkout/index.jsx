@@ -2,11 +2,12 @@ import React from "react";
 import { useSelector } from "react-redux";
 import CheckoutProduct from "../../components/CheckoutProduct";
 import Header from "../../components/header/Header";
-import { selectItems } from "../../redux/slices/basketSlice";
+import { selectItems, selectTotal } from "../../redux/slices/basketSlice";
 import { RocketLaunchIcon } from "@heroicons/react/24/solid";
 
 function Checkout() {
   const items = useSelector(selectItems);
+  const total = useSelector(selectTotal);
   return (
     <div className="bg-lightEmerald">
       <Header />
@@ -18,6 +19,7 @@ function Checkout() {
           {items.map((item, i) => (
             <CheckoutProduct
               key={i}
+              id={item.id}
               image={item.image}
               title={item.title}
               description={item.description}
@@ -31,9 +33,12 @@ function Checkout() {
         <div className="md:w-3/12 bg-white rounded-sm p-3 shadow-sm order-1 md:order-2">
           <p className="py-1 font-semibold text-sm uppercase">Basket Summary</p>
           <div className="flex flex-rox space-x-3 py-5 border-t-[1px] border-solid border-lightGray">
-            <p>Sub-total</p>
+            <p>Sub-total ({items.length}) :</p>
             <div className="flex flex-grow"></div>
-            <p className="font-semibold text-lg"> 30 125 DA</p>
+            <p className="font-semibold text-lg">
+              {" "}
+              {items.length ? total : 0} DA
+            </p>
           </div>
           <p className="text-darkGray text-xs pb-2 border-b-[1px] border-solid border-lightGray ">
             Delivery fees are not included at this stage.
