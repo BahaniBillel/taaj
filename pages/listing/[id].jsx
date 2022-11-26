@@ -69,7 +69,7 @@ function Listing() {
           <div>
             <div ref={sliderRef} className="keen-slider ">
               {page.pictures.map((pic) => (
-                <div className="keen-slider__slide  ">
+                <div className="keen-slider__slide  " key={pic}>
                   <Image
                     src={pic}
                     width={900}
@@ -87,7 +87,7 @@ function Listing() {
 
             <div ref={thumbnailRef} className="keen-slider thumbnail">
               {page.pictures.map((pic) => (
-                <div className="keen-slider__slide ">
+                <div className="keen-slider__slide " key={pic}>
                   <Image src={pic} width={300} height={300} objectFit="cover" />
                 </div>
               ))}

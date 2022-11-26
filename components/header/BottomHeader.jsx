@@ -48,12 +48,15 @@ function BottomHeader() {
                   </div>
                   <div className="bg-lightEmerald text-darkGray p-5 grid grid-cols-3 gap-10 w-screen">
                     {link.sublinks.map((mysublinks) => (
-                      <div>
+                      <div key={mysublinks}>
                         <h1 className="text-lg font-semibold">
                           {mysublinks.Head}
                         </h1>
                         {mysublinks.sublink.map((slink) => (
-                          <li className="text-sm text-gray-600 my-2.5">
+                          <li
+                            className="text-sm text-gray-600 my-2.5"
+                            key={slink}
+                          >
                             <Link
                               href={slink.link}
                               className="hover:text-primary"
