@@ -6,8 +6,18 @@ import { selectItems, selectTotal } from "../../redux/slices/basketSlice";
 import { RocketLaunchIcon } from "@heroicons/react/24/solid";
 
 function Checkout() {
-  const items = useSelector(selectItems);
+  // const items = useSelector(selectItems);
   const total = useSelector(selectTotal);
+  const items = useSelector(selectItems);
+
+  const getTotalQuantity = () => {
+    let total = 0;
+    items.forEach((item) => {
+      total += item.quantity;
+    });
+    return total;
+  };
+
   return (
     <div className="bg-lightEmerald">
       <Header />
@@ -16,7 +26,7 @@ function Checkout() {
           <p className="font-semibold text-lg p-2 rounded-sm bg-white">
             Basket
           </p>
-          {items.map((item, i) => (
+          {items?.map((item, i) => (
             <CheckoutProduct
               key={i}
               id={item.id}
@@ -26,6 +36,7 @@ function Checkout() {
               price={item.price}
               category={item.category}
               url={item.url}
+              quantity={item.quantity}
             />
           ))}
         </div>

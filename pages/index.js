@@ -4,6 +4,8 @@ import Header from "../components/header/Header";
 import Hero from "../components/hero/Hero";
 import ProductsDisplay from "../components/products/ProductsDisplay";
 import products from "../utils/data.json";
+import EightGrids from "../components/grids/EightGrids";
+// import "../styles/keen-slider.css";
 
 export default function Home() {
   return (
@@ -16,6 +18,7 @@ export default function Home() {
 
       <main className="">
         <Hero />
+
         <ProductsDisplay products={products} />
       </main>
     </div>
@@ -24,14 +27,14 @@ export default function Home() {
 
 // importing data from the server
 
-export async function getServerSideProps(context) {
-  const products = await fetch("https://fakestoreapi.com/products").then(
-    (res) => res.json()
-  );
+// export async function getServerSideProps(context) {
+//   const products = await fetch("https://fakestoreapi.com/products").then(
+//     (res) => res.json()
+//   );
 
-  return {
-    props: {
-      products,
-    },
-  };
-}
+//   return {
+//     props: {
+//       products,
+//     },
+//   };
+// }

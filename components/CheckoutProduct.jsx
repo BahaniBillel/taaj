@@ -1,9 +1,18 @@
 import { StarIcon, TrashIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import StarRatings from "react-star-ratings";
-import { addToBasket, removeFromBasket } from "../redux/slices/basketSlice";
+import {
+  addToBasket,
+  removeFromBasket,
+  selectItems,
+  incrementQuantity,
+  decrementQuantity,
+} from "../redux/slices/basketSlice";
+
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function CheckoutProduct({
   id,
@@ -14,24 +23,54 @@ function CheckoutProduct({
   image,
   url,
   rating,
+  quantity,
 }) {
   const dispatch = useDispatch();
-  const addItemToBasket = () => {
-    const product = {
-      id,
-      title,
-      price,
-      description,
-      category,
-      image,
-      url,
-      rating,
-    };
-    dispatch(addToBasket(product));
+
+  const increaseProduct = () => {
+    dispatch(incrementQuantity(id));
+  };
+
+  const decrementProduct = () => {
+    dispatch(decrementQuantity(id));
   };
 
   const removeItemFromBasket = () => {
     dispatch(removeFromBasket({ id }));
+  };
+  const notify = () => {
+    // toast("Default Notification !");
+
+    // toast.success("Success Notification !", {
+    //   position: toast.POSITION.TOP_CENTER,
+    // });
+
+    // toast.error("Error Notification !", {
+    //   position: toast.POSITION.TOP_LEFT,
+    // });
+
+    // toast.warn("Warning Notification !", {
+    //   position: toast.POSITION.BOTTOM_LEFT,
+    // });
+
+    // toast.info("Info Notification !", {
+    //   position: toast.POSITION.BOTTOM_CENTER,
+    // });
+
+    toast("One more item added  to cart", {
+      position: toast.POSITION.BOTTOM_RIGHT,
+      className: "foo-bar",
+    });
+  };
+
+  const items = useSelector(selectItems);
+
+  const getTotalQuantity = () => {
+    let total = 0;
+    items.forEach((item) => {
+      total += item.quantity;
+    });
+    return total;
   };
 
   return (
@@ -52,6 +91,7 @@ function CheckoutProduct({
         <div
           className="flex flex-row rounded-md p-2  hover:border-greenSecondary
          hover:shadow-md hover:bg-lightEmerald hover:scale-95 transition-all duration-150 ease-in-out group"
+          onClick={removeItemFromBasket}
         >
           <TrashIcon className="h-5 text-greenSecondary mr-1 group-hover:text-greenSecondary" />
           <p className="text-greenSecondary text-sm tracking-wide group-hover:text-greenSecondary">
@@ -82,14 +122,14 @@ function CheckoutProduct({
         <div className="flex flex-row space-x-3 items-center mt-5">
           <button
             className="bg-greenSecondary py-1 px-3 rounded-sm text-white hover:scale-95 transition-shadow duration-150"
-            onClick={removeItemFromBasket}
+            onClick={decrementProduct}
           >
             -
           </button>
-          <p>0</p>
+          <p>{quantity}</p>
           <button
             className="bg-greenPrimary py-1 px-3 rounded-sm text-white shadow-md hover:scale-95 transition-shadow duration-150"
-            onClick={addItemToBasket}
+            onClick={increaseProduct}
           >
             +
           </button>

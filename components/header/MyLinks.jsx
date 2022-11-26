@@ -1,6 +1,6 @@
 export const links = [
   {
-    name: "Men",
+    name: "Clothes",
     submenu: true,
     sublinks: [
       {
@@ -57,7 +57,7 @@ export const links = [
     ],
   },
   {
-    name: "Women",
+    name: "Jewelry & Accessories",
     submenu: true,
     sublinks: [
       {
@@ -114,7 +114,7 @@ export const links = [
     ],
   },
   {
-    name: "Kid's",
+    name: "Holidays & sales",
     submenu: true,
     sublinks: [
       {
@@ -169,5 +169,22 @@ export const links = [
         ],
       },
     ],
+  },
+  {
+    name: "Home & Living",
+  },
+  {
+    name: "Toy & Entertaiment",
+  },
+  ,
+  {
+    name: "Art & Collectible",
+  },
+  {
+    name: "Craft Supplies",
+  },
+  ,
+  {
+    name: "Vintage",
   },
 ];

@@ -7,13 +7,14 @@ import {
   HeartIcon,
 } from "@heroicons/react/24/solid";
 import { useSelector } from "react-redux";
-import { selectItems } from "../../redux/slices/basketSlice";
+import { selectItems, selectLikes } from "../../redux/slices/basketSlice";
 import Link from "next/link";
-import { selectCounts } from "../../redux/slices/heartSlice";
 
 function UpperHeader() {
   const items = useSelector(selectItems);
-  const likes = useSelector((state) => state.heart.counts);
+  const likes = useSelector(selectLikes);
+
+  // console.log(likes);
   return (
     <div className="bg-darkGray h-auto grid grid-cols-12 grid-flow-row-2 md:grid-rows-1 py-2 px-3 md:px-5 ">
       {/* logo */}
@@ -52,8 +53,8 @@ function UpperHeader() {
           <Link href="/likes">
             <div className="relative items-center ">
               <HeartIcon className="h-5 md:h-8 " />
-              <span className=" absolute -top-2 left-2/4 text-white text-xs font-bold   z-10  bg-darkGray py-1 px-2 rounded-full">
-                {likes}
+              <span className=" absolute -top-2 left-2/4 text-white text-xs font-bold   z-10  bg-red py-1 px-2 rounded-full">
+                {likes.length}
               </span>
             </div>
           </Link>
@@ -64,7 +65,7 @@ function UpperHeader() {
             <div className="relative items-center ">
               <ShoppingCartIcon className="h-5 md:h-8 " />
               <span className=" absolute -top-2 left-2/4 text-white text-xs font-bold   z-10  bg-greenSecondary py-1 px-2 rounded-full">
-                {items.length}
+                {items ? items.length : 0}
               </span>
             </div>
           </Link>
