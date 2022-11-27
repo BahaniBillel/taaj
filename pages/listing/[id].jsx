@@ -5,6 +5,21 @@ import Header from "../../components/header/Header";
 import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
 import Image from "next/image";
+import { HandThumbUpIcon } from "@heroicons/react/24/outline";
+import StarRatings from "react-star-ratings";
+import ListBox from "../../components/reusables/ListBox";
+import Closure from "../../components/reusables/Closure";
+import Tabs from "../../components/reusables/Tabs";
+
+// ListBox Data
+const ListItems = [
+  { name: "Wade Cooper" },
+  { name: "Arlene Mccoy" },
+  { name: "Devon Webb" },
+  { name: "Tom Cook" },
+  { name: "Tanya Fox" },
+  { name: "Hellen Schmidt" },
+];
 
 function ThumbnailPlugin(mainRef) {
   return (slider) => {
@@ -45,6 +60,9 @@ function Listing() {
   const { id } = router.query;
   const page = products.find((x) => x.title === id);
 
+  const { pictures } = page;
+  console.log(pictures);
+
   // setting up the Caroussel
   const [sliderRef, instanceRef] = useKeenSlider({
     initial: 0,
@@ -64,11 +82,12 @@ function Listing() {
     <div>
       <Header />
 
-      <div className="px-1 md:px-16 grid grid-cols-3 gap-5 md:mt-5">
-        <div className="col-span-3 md:col-span-2  h-screen p-1 md:p-2">
+      <div className="px-1 flex flex-col md:px-16 md:grid  md:grid-cols-3 gap-5 md:mt-5">
+        {/* Left side */}
+        <div className="col-span-3 md:col-span-2  p-1 md:p-2">
           <div>
             <div ref={sliderRef} className="keen-slider ">
-              {page.pictures.map((pic) => (
+              {pictures.map((pic) => (
                 <div className="keen-slider__slide  " key={pic}>
                   <Image
                     src={pic}
@@ -78,23 +97,99 @@ function Listing() {
                   />
                 </div>
               ))}
-              {/* <div className="keen-slider__slide ">2</div>
-              <div className="keen-slider__slide ">3</div>
-              <div className="keen-slider__slide ">4</div>
-              <div className="keen-slider__slide ">5</div>
-              <div className="keen-slider__slide">6</div> */}
             </div>
 
             <div ref={thumbnailRef} className="keen-slider thumbnail">
-              {page.pictures.map((pic) => (
+              {pictures.map((pic) => (
                 <div className="keen-slider__slide " key={pic}>
                   <Image src={pic} width={300} height={300} objectFit="cover" />
                 </div>
               ))}
             </div>
           </div>
+          <div className="mt-10">
+            <div className="mt-2 flex flex-row items-center space-x-4">
+              <p className=" text-xl md:text-3xl font-light text-darkGray">
+                {" "}
+                256 Reviews
+              </p>
+
+              <StarRatings
+                rating={page.rating.rate}
+                starRatedColor="black"
+                changeRating={3}
+                numberOfStars={5}
+                name="rating"
+                starDimension="26px"
+              />
+            </div>
+          </div>
+          <Tabs />
         </div>
-        <div className="col-span- bg-red h-screen hidden md:block">right</div>
+        {/* Right side  bottom side mobile*/}
+        <div className="h-full  md:block p-2 md:mt-5 mb-20">
+          <div>
+            {/* Store name and the follow button */}
+            <div className="flex flex-row space-x-5">
+              <h4 className="uppercase">{page.category}</h4>
+              <div
+                className="flex flex-row space-x-1 items-center text-xs cursor-pointer px-3 py-1 rounded-xl bg-white w-24 hover:bg-lightGray
+              transition-all ease-in-out duration-200 hover:scale-95 hover:shadow-sm hover:origin-bottom"
+              >
+                <HandThumbUpIcon className="h-5  " />
+                <p>Follow</p>
+              </div>
+            </div>
+
+            {/* number of sales and ratings  */}
+
+            <div className="mt-2 flex flex-row items-center space-x-4">
+              <p className="text-xs text-darkGray"> 1,923 sales</p>
+              <div>|</div>
+
+              <StarRatings
+                rating={page.rating.rate}
+                starRatedColor="black"
+                changeRating={3}
+                numberOfStars={5}
+                name="rating"
+                starDimension="14px"
+              />
+            </div>
+
+            {/* product description ,title and price */}
+            <div className="mt-5">
+              <p className="text-xl font-semibold text-darkGray">
+                {page.title}
+              </p>
+              <p className="text-2xl font-light text-darkGray mt-2">
+                {page.description}
+              </p>
+
+              <div className="mt-5 flex flex-row space-x-3 items-center">
+                <p className="text-2xl md:text-3xl font-bold rounded-2xl px-auto py-1 bg-greenSecondary">
+                  {page.price} DA
+                </p>
+                <p className=" text-xs font-light line-through">
+                  {page.price} DA
+                </p>
+                <p className="text-xs font-light">(70% remise)</p>
+                <div className="flex-grow"></div>
+                <p className="text-greenSecondary text-xs font-semibold">
+                  Stock available
+                </p>
+              </div>
+            </div>
+
+            {/* selling infos */}
+            <p className="text-xs font-normal text-darkGray mt-3 ">
+              Local taxes included (where applicable)
+            </p>
+            {/* Options selector dropdown */}
+            <ListBox data={ListItems} />
+            <Closure />
+          </div>
+        </div>
       </div>
     </div>
   );

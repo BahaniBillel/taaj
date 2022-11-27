@@ -5,6 +5,7 @@ import Hero from "../components/hero/Hero";
 import ProductsDisplay from "../components/products/ProductsDisplay";
 import products from "../utils/data.json";
 import EightGrids from "../components/grids/EightGrids";
+import Gallery from "../components/grids/Gallery";
 // import "../styles/keen-slider.css";
 
 export default function Home() {
@@ -18,8 +19,8 @@ export default function Home() {
 
       <main className="">
         <Hero />
-
         <ProductsDisplay products={products} />
+        <Gallery />
       </main>
     </div>
   );

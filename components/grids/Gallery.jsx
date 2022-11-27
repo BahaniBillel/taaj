@@ -2,7 +2,7 @@ import React from "react";
 
 function Gallery() {
   return (
-    <div className="columns-4 gap-8 px-40">
+    <div className="columns-2 gap-2 px-2 md:columns-4 md:gap-8 md:px-40">
       <img
         class="w-full aspect-[1/1] mb-6"
         src="https://picsum.photos/500/300?random=1"
