@@ -1,0 +1,13 @@
+# 1: mapped component does not render properly 
+--causes: key was missing
+
+# 2: component keeps rendering after fetchind data from firestore using useEffect hook
+--cause : []  was missing ,
+
+# 3 : dynamique listing component showing imported database from redux empty
+--cause:
+
+
+#TypeError: currentRating.toFixed is not a function
+--cause :The rating you are passing as a prop must be integer. 
+--solution:Use parseFloat(your_rating) as rating prop.

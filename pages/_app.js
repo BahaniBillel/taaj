@@ -4,6 +4,7 @@ import { store, persistor } from "../redux/store";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { PersistGate } from "redux-persist/integration/react";
+
 // import "../../styles/style.css";
 
 function MyApp({ Component, pageProps }) {
