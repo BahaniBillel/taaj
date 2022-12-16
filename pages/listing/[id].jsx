@@ -8,7 +8,7 @@ import Image from "next/image";
 import { HandThumbUpIcon } from "@heroicons/react/24/outline";
 import StarRatings from "react-star-ratings";
 import ListBox from "../../components/reusables/ListBox";
-import ReviewForm from "../../components/reusables/reviewForm";
+// import ReviewForm from "../../components/reusables/reviewForm";
 import { selectDB } from "../../redux/slices/dbSlice";
 import { useSelector } from "react-redux";
 import { nanoid } from "@reduxjs/toolkit";
