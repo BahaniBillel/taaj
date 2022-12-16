@@ -76,10 +76,6 @@ function Listing({ id }) {
   //   getRouterPage();
   // }, []);
 
-  if (!page) {
-    return <p className="text-5xl ">loading...</p>;
-  }
-
   // setting up the Caroussel
   const [sliderRef, instanceRef] = useKeenSlider({
     initial: 0,
@@ -94,6 +90,9 @@ function Listing({ id }) {
     },
     [ThumbnailPlugin(instanceRef)]
   );
+  if (!page) {
+    return <p className="text-5xl ">loading...</p>;
+  }
 
   return (
     <div>
@@ -111,6 +110,7 @@ function Listing({ id }) {
                     width={900}
                     height={900}
                     objectFit="contain"
+                    alt="/"
                   />
                 </div>
               ))}
@@ -119,7 +119,13 @@ function Listing({ id }) {
             <div ref={thumbnailRef} className="keen-slider thumbnail">
               {page.pictures.map((pic) => (
                 <div className="keen-slider__slide " key={nanoid()}>
-                  <Image src={pic} width={300} height={300} objectFit="cover" />
+                  <Image
+                    src={pic}
+                    width={300}
+                    height={300}
+                    objectFit="cover"
+                    alt="/"
+                  />
                 </div>
               ))}
             </div>
