@@ -178,9 +178,7 @@ function Listing({ id }) {
           {/* consumers reviews */}
           {/* <Tabs visibility={"hidden md:block"} /> */}
 
-          <div className="hidden md:block">
-            <ReviewForm />
-          </div>
+          <div className="hidden md:block">{/* <ReviewForm /> */}</div>
         </div>
 
         {/* Right side  bottom side mobile*/}
