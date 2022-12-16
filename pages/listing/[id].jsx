@@ -248,9 +248,7 @@ function Listing({ id }) {
             {/* consumers reviews */}
             {/* <Tabs visibility={" block md:hidden"} /> */}
 
-            <div className="block md:hidden">
-              <ReviewForm />
-            </div>
+            <div className="block md:hidden">{/* <ReviewForm /> */}</div>
           </div>
         </div>
       </div>
