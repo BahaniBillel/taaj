@@ -12,6 +12,8 @@ import ListBox from "../../components/reusables/ListBox";
 import { selectDB } from "../../redux/slices/dbSlice";
 import { useSelector } from "react-redux";
 import { nanoid } from "@reduxjs/toolkit";
+import { collection, doc, getDocs, setDoc } from "firebase/firestore";
+import { db } from "../../firebase";
 
 // ListBox Data
 const ListItems = [
@@ -56,25 +58,18 @@ function ThumbnailPlugin(mainRef) {
   };
 }
 
-function Listing({ id }) {
+function Listing({ page }) {
   // db
-  const products = useSelector(selectDB);
+  // const products = useSelector(selectDB);
   // console.log(products);
-  console.log(id);
-  const page = products.find((x) => x.title === id);
+  // console.log(id);
 
   // state management
   // const [page, setPage] = useState();
+  // const router = useRouter();
+  // const { id } = router;
 
-  // useEffect(async () => {
-  //   async function getRouterPage() {
-  //     const router = useRouter();
-  //     const { id } = router.query;
-  //     setPage(page);
-  //   }
-
-  //   getRouterPage();
-  // }, []);
+  // console.log(products);
 
   // setting up the Caroussel
   const [sliderRef, instanceRef] = useKeenSlider({
@@ -90,9 +85,9 @@ function Listing({ id }) {
     },
     [ThumbnailPlugin(instanceRef)]
   );
-  if (!page) {
-    return <p className="text-5xl ">loading...</p>;
-  }
+  // if (!page) {
+  //   return <p className="text-5xl ">loading...</p>;
+  // }
 
   return (
     <div>
@@ -256,35 +251,52 @@ function Listing({ id }) {
 
 export default Listing;
 
-// async function getData() {
-//   const products = await useSelector(selectDB);
-//   return products;
-// }
-
-// const products = useSelector(selectDB);
-export async function getStaticProps(context) {
-  const { params } = context;
-
-  const id = params.id;
-  // const page = await products.find((x) => x.title === id);
-  console.log(id);
-  return {
-    props: {
-      id: id,
-    },
-  };
+async function getData() {
+  // Fetching data from firestore
+  const querySnapshot = await getDocs(collection(db, "products"));
+  const products = querySnapshot.docs.map((doc) => ({ ...doc.data() }));
+  return products;
 }
 
-export async function getStaticPaths(context) {
-  // const ids = products.map((product) => product.id);
-  // const params = ids.map((id) => ({ params: { id: id } }));
+// export async function getStaticProps(context) {
+//   // searching for the page id in the firestore database
+//   const { params } = context;
+//   const id = params.id;
+
+//   const products = await getData();
+
+//   const page = products.find((x) => x.title === id);
+//   if (!page) return { notFound: true };
+
+//   return {
+//     props: { page },
+//   };
+// }
+
+// export async function getStaticPaths() {
+//   const products = await getData();
+
+//   const ids = products.map((product) => product.id.toString());
+//   const params = ids.map((id) => ({ params: { id: id } }));
+//   return {
+//     paths: params,
+//     fallback: "blocking",
+//   };
+// }
+
+export async function getServerSideProps(context) {
+  // Fetching data from firestore
+  const querySnapshot = await getDocs(collection(db, "products"));
+  const products = querySnapshot.docs.map((doc) => ({ ...doc.data() }));
+
+  // searching for the page id in the firestore database
+  const { params, req, res } = context;
+  const id = params.id;
+  const page = products.find((x) => x.title === id);
+  if (!page) return { notFound: true };
+  console.log(req);
+  console.log(res);
   return {
-    paths: [
-      { params: { id: "Mens Casual Premium Slim Fit T-Shirts" } },
-      {
-        params: { id: "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops" },
-      },
-    ],
-    fallback: true,
+    props: { page },
   };
 }
