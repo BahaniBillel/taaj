@@ -84,7 +84,7 @@ function TenGrids() {
         </h1>
         <p className="text-darkGray font-light">
           Fun fact: behind every sponsored item there is an Etsy seller hoping
-          you'll check out their shop
+          you`&apos;`ll check out their shop
         </p>
       </div>
       <div className=" w-full h-[450px]   grid grid-cols-2 md:grid-cols-5  md:grid-rows-10 gap-2 md:gap-5    ">
