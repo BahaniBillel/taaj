@@ -35,10 +35,6 @@ function Gallery() {
         class="w-full aspect-video mb-6"
         src="https://picsum.photos/500/300?random=8"
       />
-      <img
-        class="w-full aspect-square mb-6"
-        src="https://picsum.photos/500/300?random=9"
-      />
     </div>
   );
 }

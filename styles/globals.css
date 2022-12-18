@@ -7,7 +7,10 @@
     @apply cursor-pointer hover:underline;
   } */
   .card {
-    @apply rounded-sm  hover:shadow-lg duration-100 transition-all ease-in-out cursor-pointer text-5xl text-center font-extrabold justify-center flex flex-col hover:scale-[1.02];
+    @apply rounded-xl  hover:shadow-lg duration-100 transition-all ease-in-out cursor-pointer  text-center font-extrabold justify-center flex flex-col hover:scale-[1.02] relative  overflow-hidden;
+  }
+  .card-2 {
+    @apply rounded-md  hover:shadow-lg duration-100 transition-all ease-in-out cursor-pointer  text-center font-extrabold justify-center flex flex-col hover:scale-[1.02] relative  overflow-hidden;
   }
 
   .navlink {

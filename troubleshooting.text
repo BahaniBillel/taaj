@@ -4,10 +4,16 @@
 # 2: component keeps rendering after fetchind data from firestore using useEffect hook
 --cause : []  was missing ,
 
-# 3 : dynamique listing component showing imported database from redux empty
---cause:
+# 3 : dynamique route (listing) lost on reload when trying to feed component from data coming from firebase into redux
+--cause:you need to fetch data directly to the dynamic route by using getServerSideProps , by this way the dynamic wont be lost on reload.
 
 
-#TypeError: currentRating.toFixed is not a function
+#4:TypeError: currentRating.toFixed is not a function
 --cause :The rating you are passing as a prop must be integer. 
 --solution:Use parseFloat(your_rating) as rating prop.
+
+
+#5: when you pressed the like icon on product component , then you navigate to another page , the heart icon in red
+color will be lost but the count number still there
+--want: to keep the red heart on the product when i navigate to another page
+--solution:try to save the heart state in the redux store so it will be handled by the persistor

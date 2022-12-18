@@ -59,18 +59,6 @@ function ThumbnailPlugin(mainRef) {
 }
 
 function Listing({ page }) {
-  // db
-  // const products = useSelector(selectDB);
-  // console.log(products);
-  // console.log(id);
-
-  // state management
-  // const [page, setPage] = useState();
-  // const router = useRouter();
-  // const { id } = router;
-
-  // console.log(products);
-
   // setting up the Caroussel
   const [sliderRef, instanceRef] = useKeenSlider({
     initial: 0,
@@ -85,9 +73,6 @@ function Listing({ page }) {
     },
     [ThumbnailPlugin(instanceRef)]
   );
-  // if (!page) {
-  //   return <p className="text-5xl ">loading...</p>;
-  // }
 
   return (
     <div>

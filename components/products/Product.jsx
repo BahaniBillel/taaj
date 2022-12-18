@@ -5,8 +5,9 @@ import { ShareIcon } from "@heroicons/react/24/outline";
 import { useDispatch } from "react-redux";
 import {
   addToBasket,
-  decrement,
-  increment,
+  decrementLikes,
+  incrementLikes,
+  handleHeartState,
 } from "../../redux/slices/basketSlice";
 
 import { toast, ToastContainer } from "react-toastify";
@@ -25,7 +26,9 @@ function Product({
 }) {
   const dispatch = useDispatch();
 
-  const [heart, setHeart] = useState(false);
+  // const [heart, setHeart] = useState(false);
+
+  const heart = handleHeartState();
 
   const AddItemToBasket = () => {
     const product = {
@@ -43,7 +46,8 @@ function Product({
   };
 
   const HandleHeartState = () => {
-    setHeart(!heart);
+    // setHeart(!heart);
+    handleHeartState();
     const product = {
       id,
       title,
@@ -54,9 +58,9 @@ function Product({
       url,
     };
     if (!heart) {
-      dispatch(increment(product));
+      dispatch(incrementLikes(product));
     } else {
-      dispatch(decrement({ id }));
+      dispatch(decrementLikes({ id }));
     }
   };
 
@@ -86,53 +90,54 @@ function Product({
   };
 
   return (
-    <Link href={`listing/${link}`}>
-      <div className="hover:bg-pink-400 hover:transition hover:duration-150 ease-in-out md:h-56 hover:ease-out pl-[1px] pr-[1px] pt-[1px] pb-10 m-2 rounded-b-md cursor-pointer group  overflow-hidden grid grid-rows-8 hover:shadow-md hover:scale-105 relative">
-        <div
-          className=" relative flex flex-col   bg-white z-30 p-5  space-y-2 group row-span-7  "
-          onClick={url}
-        >
-          <div className="flex flex-row  text-xs   ">
-            <div className="flex-grow"></div>
-            <p className=" flex-none text-gray-500 italic">{category}</p>
-          </div>
-
-          <div className="w-full   h-full z-0 ">
-            <Image
-              src={image}
-              height={300}
-              width={300}
-              objectFit="contain "
-              alt="om"
-            />
-          </div>
-        </div>
-
-        <div className="justify-center hidden group-hover:flex    ease-in-out group ">
-          <button
-            className="    h-7    absolute bottom-2 right-1 z-30  px-5
-        bg-greenPrimary opacity-80  rounded-xl flex flex-row items-center "
-            onClick={AddItemToBasket}
+    <section className="group relative overflow-hidden">
+      <Link href={`listing/${link}`}>
+        <div className="hover:bg-pink-400 hover:transition hover:duration-150 ease-in-out md:h-56 hover:ease-out pl-[1px] pr-[1px] pt-[1px] pb-10 m-2 rounded-b-md cursor-pointer overflow-hidden grid grid-rows-8 hover:shadow-md hover:scale-105 relative">
+          <div
+            className=" relative flex flex-col   bg-white z-30 p-5  space-y-2 group row-span-7  "
+            onClick={url}
           >
-            {/* <ShoppingBagIcon className="h-4 text-white " /> */}
-            <p className="text-xs text-white pl-1 font-bold">
-              {Math.round(price)} DA
-            </p>
-          </button>
-        </div>
+            <div className="flex flex-row  text-xs   ">
+              <div className="flex-grow"></div>
+              <p className=" flex-none text-gray-500 italic">{category}</p>
+            </div>
 
-        <div className="z-40 flex flex-col space-y-3 absolute bottom-8 -right-10 p-2 group-hover:right-0 group">
-          <button onClick={HandleHeartState}>
-            {heart ? (
-              <HeartIcon className="h-4 text-red " />
-            ) : (
-              <HeartIcon className="h-4 text-lightGray " />
-            )}
-          </button>
-          <ShareIcon className="h-4 text-darkGray" />
+            <div className="w-full   h-full z-0 ">
+              <Image
+                src={image}
+                height={300}
+                width={300}
+                objectFit="contain "
+                alt="om"
+              />
+            </div>
+          </div>
+
+          <div className="justify-center hidden group-hover:flex    ease-in-out group ">
+            <button
+              className="    h-7    absolute bottom-2 right-1 z-30  px-5
+        bg-greenPrimary opacity-80  rounded-xl flex flex-row items-center "
+              onClick={AddItemToBasket}
+            >
+              {/* <ShoppingBagIcon className="h-4 text-white " /> */}
+              <p className="text-xs text-white pl-1 font-bold">
+                {Math.round(price)} DA
+              </p>
+            </button>
+          </div>
         </div>
+      </Link>
+      <div className="z-40  flex flex-col space-y-3 absolute bottom-14 -right-10 p-2 group-hover:right-0 group ">
+        <button onClick={HandleHeartState}>
+          {heart ? (
+            <HeartIcon className="h-4 text-red " />
+          ) : (
+            <HeartIcon className="h-4 text-lightGray " />
+          )}
+        </button>
+        <ShareIcon className="h-4 text-darkGray cursor-pointer" />
       </div>
-    </Link>
+    </section>
   );
 }
 

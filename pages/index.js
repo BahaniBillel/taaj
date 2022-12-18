@@ -8,6 +8,9 @@ import { collection, doc, getDocs, setDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { useDispatch, useSelector } from "react-redux";
 import { addData, selectDB } from "../redux/slices/dbSlice";
+import EightGrids from "../components/grids/EightGrids";
+import TenGrids from "../components/grids/TenGrids";
+import FourGridsCard from "../components/grids/FourGridsCard";
 
 export default function Home() {
   // const [products, setProducts] = useState([]);
@@ -39,7 +42,9 @@ export default function Home() {
       <main className="">
         <Hero />
         <ProductsDisplay products={productsDB} />
-        <Gallery />
+        <EightGrids />
+        <TenGrids />
+        <FourGridsCard />
       </main>
     </div>
   );

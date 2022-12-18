@@ -11,6 +11,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   items: [],
   likes: [],
+  heart: false,
 };
 
 // const initialState = {
@@ -78,11 +79,11 @@ export const basketSlice = createSlice({
 
       state.items = newBasket;
     },
-    increment: (state, action) => {
+    incrementLikes: (state, action) => {
       state.likes = [...state.likes, action.payload];
     },
 
-    decrement: (state, action) => {
+    decrementLikes: (state, action) => {
       // find the item index inside the items basket
       const index = state.likes.findIndex(
         (basketItem) => basketItem.id === action.payload.id
@@ -105,16 +106,20 @@ export const basketSlice = createSlice({
 
       state.likes = newLikes;
     },
+    handleHeartState: (state) => {
+      state.heart = !heart;
+    },
   },
 });
 
 export const {
   addToBasket,
   removeFromBasket,
-  increment,
-  decrement,
+  incrementLikes,
+  decrementLikes,
   incrementQuantity,
   decrementQuantity,
+  handleHeartState,
 } = basketSlice.actions;
 
 // this how we pull items from the global store
@@ -123,5 +128,6 @@ export const selectTotal = (state) =>
   state.basket.items.reduce((total, item) => Math.round(total + item.price), 0);
 
 export const selectLikes = (state) => state.basket.likes;
+export const selectHeartState = (state) => state.basket.heart;
 
 export default basketSlice.reducer;
