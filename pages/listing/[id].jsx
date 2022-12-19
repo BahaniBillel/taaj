@@ -6,13 +6,13 @@ import Image from "next/image";
 import { HandThumbUpIcon } from "@heroicons/react/24/outline";
 import StarRatings from "react-star-ratings";
 import ListBox from "../../components/reusables/ListBox";
-import ReviewForm from "../../components/reusables/reviewForm";
-import Closure from "../../components/reusables/Closure";
+import ReviewForm from "../../components/ReviewForm";
+import Closure from "../../components/Closure";
 import { useDispatch } from "react-redux";
 import { nanoid } from "@reduxjs/toolkit";
 import { collection, doc, getDocs, setDoc } from "firebase/firestore";
 import { db } from "../../firebase";
-import Tabs from "../../components/reusables/Tabs";
+import Tabs from "../../components/Tabs";
 import { addToBasket } from "../../redux/slices/basketSlice";
 import { toast, ToastContainer } from "react-toastify";
 
