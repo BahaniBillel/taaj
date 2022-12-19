@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { useRouter } from "next/router";
-// import products from "../../utils/data.json";
+import React from "react";
 import Header from "../../components/header/Header";
 import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
@@ -8,12 +6,15 @@ import Image from "next/image";
 import { HandThumbUpIcon } from "@heroicons/react/24/outline";
 import StarRatings from "react-star-ratings";
 import ListBox from "../../components/reusables/ListBox";
-// import ReviewForm from "../../components/reusables/reviewForm";
-import { selectDB } from "../../redux/slices/dbSlice";
-import { useSelector } from "react-redux";
+import ReviewForm from "../../components/reusables/reviewForm";
+import Closure from "../../components/reusables/Closure";
+import { useDispatch } from "react-redux";
 import { nanoid } from "@reduxjs/toolkit";
 import { collection, doc, getDocs, setDoc } from "firebase/firestore";
 import { db } from "../../firebase";
+import Tabs from "../../components/reusables/Tabs";
+import { addToBasket } from "../../redux/slices/basketSlice";
+import { toast, ToastContainer } from "react-toastify";
 
 // ListBox Data
 const ListItems = [
@@ -59,6 +60,32 @@ function ThumbnailPlugin(mainRef) {
 }
 
 function Listing({ page }) {
+  // Dispatching product to store
+  const dispatch = useDispatch();
+  const { id, title, price, description, category, image, url } = page;
+  const AddItemToBasket = () => {
+    const product = {
+      id,
+      title,
+      price,
+      description,
+      category,
+      image,
+      url,
+    };
+    dispatch(addToBasket(product));
+
+    notify(page.title);
+  };
+
+  // Notifying the dispatched product
+  const notify = (name) => {
+    toast(`${name} was added to basket`, {
+      position: toast.POSITION.BOTTOM_RIGHT,
+      className: "foo-bar text-xs font-light",
+    });
+  };
+
   // setting up the Caroussel
   const [sliderRef, instanceRef] = useKeenSlider({
     initial: 0,
@@ -156,7 +183,7 @@ function Listing({ page }) {
           </div>
 
           {/* consumers reviews */}
-          {/* <Tabs visibility={"hidden md:block"} /> */}
+          <Tabs visibility={"hidden md:block"} />
 
           <div className="hidden md:block">{/* <ReviewForm /> */}</div>
         </div>
@@ -215,6 +242,21 @@ function Listing({ page }) {
                 </p>
               </div>
             </div>
+            {/* CTA */}
+            <div className="my-5 flex flex-col space-y-3">
+              {/* CTA: buy now */}
+              <button className="py-1 px-5 w-full border-[1px] rounded-2xl font-semibold text-xl hover:scale-95 transition-all duration-150 ease-in-out">
+                Buy it now
+              </button>
+              {/* CTA: add to basket */}
+              <button
+                className="py-1 px-5 w-full border-[1px] rounded-2xl font-semibold text-xl 
+               bg-darkGray text-white hover:scale-95 transition-all duration-150 ease-in-out"
+                onClick={AddItemToBasket}
+              >
+                Add to basket
+              </button>
+            </div>
 
             {/* selling infos */}
             <p className="text-xs font-normal text-darkGray mt-3 ">
@@ -222,11 +264,16 @@ function Listing({ page }) {
             </p>
             {/* Options selector dropdown */}
             <ListBox data={ListItems} />
-            {/* <Closure /> */}
+            <Closure />
             {/* consumers reviews */}
-            {/* <Tabs visibility={" block md:hidden"} /> */}
 
-            <div className="block md:hidden">{/* <ReviewForm /> */}</div>
+            <div className="block md:hidden">
+              <Tabs />
+            </div>
+
+            <div className="block md:hidden">
+              <ReviewForm />
+            </div>
           </div>
         </div>
       </div>
@@ -235,6 +282,8 @@ function Listing({ page }) {
 }
 
 export default Listing;
+
+// -----------------------------------------------------------------------------------------------------------------------------------------
 
 async function getData() {
   // Fetching data from firestore
@@ -270,17 +319,15 @@ async function getData() {
 // }
 
 export async function getServerSideProps(context) {
-  // Fetching data from firestore
-  const querySnapshot = await getDocs(collection(db, "products"));
-  const products = querySnapshot.docs.map((doc) => ({ ...doc.data() }));
+  const products = await getData();
 
   // searching for the page id in the firestore database
   const { params, req, res } = context;
   const id = params.id;
   const page = products.find((x) => x.title === id);
   if (!page) return { notFound: true };
-  console.log(req);
-  console.log(res);
+  // console.log(req);
+  // console.log(res);
   return {
     props: { page },
   };

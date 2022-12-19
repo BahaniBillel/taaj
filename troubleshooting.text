@@ -17,3 +17,6 @@
 color will be lost but the count number still there
 --want: to keep the red heart on the product when i navigate to another page
 --solution:try to save the heart state in the redux store so it will be handled by the persistor
+
+#6 when send props from serversidepropos to component you need to destructure the propos and dispatch it to 
+avoid undefined warning when sending data to store

@@ -2,14 +2,26 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { HeartIcon } from "@heroicons/react/24/solid";
 import { useDispatch } from "react-redux";
-import { decrement, increment } from "../../redux/slices/basketSlice";
+import { decrementLikes, incrementLikes } from "../../redux/slices/basketSlice";
 
-function GridSpot({ style, img, price, heartDisplayed }) {
+function GridSpot({
+  style,
+  img,
+  price,
+  heartDisplayed,
+  id,
+  title,
+  description,
+  category,
+  image,
+  url,
+}) {
   const [heart, setHeart] = useState(false);
   const dispatch = useDispatch();
 
-  const HandleHeartState = () => {
+  const HandleHeartLikes = () => {
     setHeart(!heart);
+
     const product = {
       id,
       title,
@@ -20,16 +32,16 @@ function GridSpot({ style, img, price, heartDisplayed }) {
       url,
     };
     if (!heart) {
-      dispatch(increment(product));
+      dispatch(incrementLikes(product));
     } else {
-      dispatch(decrement({ id }));
+      dispatch(decrementLikes({ id }));
     }
   };
   return (
     <div className={`${style} group `}>
       {heartDisplayed ? (
         <div className=" top-96 transition-all duration-200  ease-in-out hidden group-hover:block z-30 group-hover:text-white absolute right-5 group-hover:top-5">
-          <button onClick={HandleHeartState}>
+          <button onClick={HandleHeartLikes}>
             {heart ? (
               <div className=" rounded-full bg-white py-[5px] w-7 h-7  relative  hover:border-white hover:scale-105 hover:shadow-md hover:shadow-white">
                 <HeartIcon className="h-4 text-red  absolute left-2/4 top-2/4 -translate-x-2/4 -translate-y-2/4" />

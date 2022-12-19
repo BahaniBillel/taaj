@@ -26,28 +26,11 @@ function Product({
 }) {
   const dispatch = useDispatch();
 
-  // const [heart, setHeart] = useState(false);
+  const [heart, setHeart] = useState(false);
 
-  const heart = handleHeartState();
+  const HandleHeartLikes = () => {
+    setHeart(!heart);
 
-  const AddItemToBasket = () => {
-    const product = {
-      id,
-      title,
-      price,
-      description,
-      category,
-      image,
-      url,
-    };
-    dispatch(addToBasket(product));
-
-    notify();
-  };
-
-  const HandleHeartState = () => {
-    // setHeart(!heart);
-    handleHeartState();
     const product = {
       id,
       title,
@@ -62,31 +45,6 @@ function Product({
     } else {
       dispatch(decrementLikes({ id }));
     }
-  };
-
-  const notify = () => {
-    // toast("Default Notification !");
-
-    // toast.success("Success Notification !", {
-    //   position: toast.POSITION.TOP_CENTER,
-    // });
-
-    // toast.error("Error Notification !", {
-    //   position: toast.POSITION.TOP_LEFT,
-    // });
-
-    // toast.warn("Warning Notification !", {
-    //   position: toast.POSITION.BOTTOM_LEFT,
-    // });
-
-    // toast.info("Info Notification !", {
-    //   position: toast.POSITION.BOTTOM_CENTER,
-    // });
-
-    toast(" added  to cart", {
-      position: toast.POSITION.BOTTOM_RIGHT,
-      className: "foo-bar",
-    });
   };
 
   return (
@@ -117,7 +75,6 @@ function Product({
             <button
               className="    h-7    absolute bottom-2 right-1 z-30  px-5
         bg-greenPrimary opacity-80  rounded-xl flex flex-row items-center "
-              onClick={AddItemToBasket}
             >
               {/* <ShoppingBagIcon className="h-4 text-white " /> */}
               <p className="text-xs text-white pl-1 font-bold">
@@ -128,7 +85,7 @@ function Product({
         </div>
       </Link>
       <div className="z-40  flex flex-col space-y-3 absolute bottom-14 -right-10 p-2 group-hover:right-0 group ">
-        <button onClick={HandleHeartState}>
+        <button onClick={HandleHeartLikes}>
           {heart ? (
             <HeartIcon className="h-4 text-red " />
           ) : (

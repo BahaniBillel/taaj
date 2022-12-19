@@ -1,22 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-// import Cookies from "js-cookie";
-
-// const cartItemsFromStorage = localStorage.getItem("items")
-//   ? JSON.parse(localStorage.getItem("items"))
-//   : [];
-// if (typeof window !== "undefined") {
-//   // Perform localStorage action
-// }
 
 const initialState = {
   items: [],
   likes: [],
-  heart: false,
+  heart: [],
 };
-
-// const initialState = {
-//   cart: { cartItems: cartItemsFromStorage },
-// };
 
 export const basketSlice = createSlice({
   name: "basket",
@@ -106,9 +94,6 @@ export const basketSlice = createSlice({
 
       state.likes = newLikes;
     },
-    handleHeartState: (state) => {
-      state.heart = !heart;
-    },
   },
 });
 
@@ -119,7 +104,6 @@ export const {
   decrementLikes,
   incrementQuantity,
   decrementQuantity,
-  handleHeartState,
 } = basketSlice.actions;
 
 // this how we pull items from the global store
