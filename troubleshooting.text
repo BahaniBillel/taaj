@@ -16,7 +16,19 @@
 #5: when you pressed the like icon on product component , then you navigate to another page , the heart icon in red
 color will be lost but the count number still there
 --want: to keep the red heart on the product when i navigate to another page
---solution:try to save the heart state in the redux store so it will be handled by the persistor
+--solution:try to save the heart state in the redux store so it will be handled by the persistor (not confirmed)
 
 #6 when send props from serversidepropos to component you need to destructure the propos and dispatch it to 
 avoid undefined warning when sending data to store
+
+#7 how to use timestamp from firebase in nextjs serversidepropos?
+--problem : serilization error,
+--solution:
+
+#8 whenever i click on the tap.panel in Tabs related to reviews i move to top page.
+--cause: 
+--solution :
+
+
+buy it now --> checkout
+addToBasket --> cart --> checkout

@@ -4,8 +4,9 @@ import CheckoutProduct from "../../components/CheckoutProduct";
 import Header from "../../components/header/Header";
 import { selectItems, selectTotal } from "../../redux/slices/basketSlice";
 import { RocketLaunchIcon } from "@heroicons/react/24/solid";
+import Link from "next/link";
 
-function Checkout() {
+function Cart() {
   // const items = useSelector(selectItems);
   const total = useSelector(selectTotal);
   const items = useSelector(selectItems);
@@ -70,13 +71,14 @@ function Checkout() {
               TAAJ Express items are eligible for free delivery to a pick-up
               point in Algiers.
             </p>
-
-            <div
-              className="border-t-[1px] border-solid border-lightGray bg-darkGray text-white text-center cursor-pointer
+            <Link href="/checkout">
+              <div
+                className="border-t-[1px] border-solid border-lightGray bg-darkGray text-white text-center cursor-pointer
              px-3 py-2 rounded-md hover:scale-95 transition-all duration-150 hover:shadow-md"
-            >
-              BUY
-            </div>
+              >
+                BUY
+              </div>
+            </Link>
           </div>
         </div>
       </div>
@@ -84,4 +86,4 @@ function Checkout() {
   );
 }
 
-export default Checkout;
+export default Cart;

@@ -61,7 +61,7 @@ function UpperHeader() {
         </div>
         {/* cart */}
         <div className="flex flex-row space-x-1  items-end ">
-          <Link href="/checkout">
+          <Link href="/cart">
             <div className="relative items-center ">
               <ShoppingCartIcon className="h-5 md:h-8 " />
               <span className=" absolute -top-2 left-2/4 text-white text-xs font-bold   z-10  bg-greenSecondary py-1 px-2 rounded-full">

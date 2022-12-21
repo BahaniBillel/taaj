@@ -15,6 +15,7 @@ import { db } from "../../firebase";
 import Tabs from "../../components/Tabs";
 import { addToBasket } from "../../redux/slices/basketSlice";
 import { toast, ToastContainer } from "react-toastify";
+import Link from "next/link";
 
 // ListBox Data
 const ListItems = [
@@ -62,7 +63,7 @@ function ThumbnailPlugin(mainRef) {
 function Listing({ page }) {
   // Dispatching product to store
   const dispatch = useDispatch();
-  const { id, title, price, description, category, image, url } = page;
+  const { id, title, price, description, category, image, url, reviews } = page;
   const AddItemToBasket = () => {
     const product = {
       id,
@@ -72,12 +73,14 @@ function Listing({ page }) {
       category,
       image,
       url,
+      reviews,
     };
     dispatch(addToBasket(product));
 
     notify(page.title);
   };
 
+  console.log(page);
   // Notifying the dispatched product
   const notify = (name) => {
     toast(`${name} was added to basket`, {
@@ -183,9 +186,7 @@ function Listing({ page }) {
           </div>
 
           {/* consumers reviews */}
-          <Tabs visibility={"hidden md:block"} />
-
-          <div className="hidden md:block">{/* <ReviewForm /> */}</div>
+          <Tabs categories={page.reviews} />
         </div>
 
         {/* Right side  bottom side mobile*/}
@@ -245,9 +246,11 @@ function Listing({ page }) {
             {/* CTA */}
             <div className="my-5 flex flex-col space-y-3">
               {/* CTA: buy now */}
-              <button className="py-1 px-5 w-full border-[1px] rounded-2xl font-semibold text-xl hover:scale-95 transition-all duration-150 ease-in-out">
-                Buy it now
-              </button>
+              <Link href="/checkout">
+                <button className="py-1 px-5 w-full border-[1px] rounded-2xl font-semibold text-xl hover:scale-95 transition-all duration-150 ease-in-out">
+                  Buy it now
+                </button>
+              </Link>
               {/* CTA: add to basket */}
               <button
                 className="py-1 px-5 w-full border-[1px] rounded-2xl font-semibold text-xl 
@@ -268,11 +271,7 @@ function Listing({ page }) {
             {/* consumers reviews */}
 
             <div className="block md:hidden">
-              <Tabs />
-            </div>
-
-            <div className="block md:hidden">
-              <ReviewForm />
+              <Tabs categories={page.reviews} />
             </div>
           </div>
         </div>
@@ -289,6 +288,7 @@ async function getData() {
   // Fetching data from firestore
   const querySnapshot = await getDocs(collection(db, "products"));
   const products = querySnapshot.docs.map((doc) => ({ ...doc.data() }));
+
   return products;
 }
 
@@ -326,8 +326,7 @@ export async function getServerSideProps(context) {
   const id = params.id;
   const page = products.find((x) => x.title === id);
   if (!page) return { notFound: true };
-  // console.log(req);
-  // console.log(res);
+
   return {
     props: { page },
   };
