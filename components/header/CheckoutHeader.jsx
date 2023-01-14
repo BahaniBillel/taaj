@@ -12,55 +12,55 @@ import Link from "next/link";
 
 function CheckoutHeader() {
   return (
-    <div className="bg-darkGray border-lightGray border-solid border-b-[1px] h-auto w-full grid grid-cols-10  md:grid-rows-1 py-5 px-3 md:px-36 ">
+    <div className="bg-darkGray border-lightGray border-solid border-b-[1px] h-auto w-full flex  py-5 px-5 md:px-36 ">
       {/* logo */}
-      <Link
-        href="/"
-        className="col-span-5  md:col-span-5 text-greenSecondary font-bold text-3xl  "
-      >
+      <Link href="/" className=" text-greenSecondary font-bold text-3xl  ">
         TAAJ
       </Link>
 
       {/* Order process */}
+      <div className="flex flex-grow"></div>
 
-      <div className="col-span-5 md:col-span-5 flex flex-row space-x-48 ">
-        <div>
-          <label for="delivery" className="text-white mr-2">
-            Delivery
-          </label>
-          <input
-            type="radio"
-            name="delivery"
-            id="delivery"
-            className="indeterminate:bg-greenSecondary "
-            readOnly={true}
-          />
-        </div>
-        <div>
-          <label for="payment" className="text-white mr-2">
-            Payment
-          </label>
-          <input
-            type="radio"
-            name="payment"
-            id="payment"
-            className="indeterminate:bg-greenSecondary "
-            readOnly={true}
-          />
-        </div>
-        <div>
-          <label for="review" className="text-white mr-2">
-            Review
-          </label>
-          <input
-            type="radio"
-            name="review"
-            id="review"
-            className="indeterminate:bg-greenSecondary "
-            readOnly={true}
-          />
-        </div>
-      </div>
+      <form className="">
+        <fieldset className=" flex flex-col md:flex-row md:space-x-48 items-start">
+          <div className=" flex flex-row items-center space-x-1  ">
+            <input
+              type="radio"
+              name="order"
+              id="delivery"
+              className="indeterminate:bg-greenSecondary "
+              readOnly={true}
+            />
+            <label for="delivery" className="text-white mr-2">
+              Delivery
+            </label>
+          </div>
+          <div className=" flex flex-row items-center space-x-1  ">
+            <input
+              type="radio"
+              name="order"
+              id="payment"
+              className="indeterminate:bg-greenSecondary "
+              readOnly={true}
+            />
+            <label for="payment" className="text-white mr-2">
+              Payment
+            </label>
+          </div>
+          <div className=" flex flex-row items-center space-x-1  ">
+            <input
+              type="radio"
+              name="order"
+              id="review"
+              className="indeterminate:bg-greenSecondary "
+              readOnly={true}
+            />
+            <label for="review" className="text-white mr-2">
+              Review
+            </label>
+          </div>
+        </fieldset>
+      </form>
     </div>
   );
 }

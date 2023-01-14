@@ -45,12 +45,14 @@ const data = [
     style: "col-span-1 row-span-2  bg-greenSecondary card ",
   },
 ];
-function EightGrids() {
+function EightGrids({ x1, x2 }) {
   return (
     <div className=" w-full h-[500px]   grid grid-cols-2 md:grid-cols-4 grid-rows-5 gap-2 md:gap-5   py-5   px-5 md:px-20 ">
-      {data.map((img) => (
-        <GridSpot key={img.id} style={img.style} img={img.url} />
-      ))}
+      {data
+        .filter((img) => img.id < x1 || img.id > x2)
+        .map((img) => (
+          <GridSpot key={img.id} style={img.style} img={img.url} />
+        ))}
     </div>
   );
 }

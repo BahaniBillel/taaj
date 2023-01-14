@@ -61,26 +61,22 @@ function Product({
             </div>
 
             <div className="w-full   h-full z-0 ">
-              <Image
-                src={image}
-                height={300}
-                width={300}
-                objectFit="contain "
-                alt="om"
-              />
+              <Image src={image} objectFit="contain " alt="om" fill />
             </div>
           </div>
 
           <div className="justify-center hidden group-hover:flex    ease-in-out group ">
             <button
               className="    h-7    absolute bottom-2 right-1 z-30  px-5
-        bg-greenPrimary opacity-80  rounded-xl flex flex-row items-center "
+         opacity-80  rounded-xl flex flex-row items-center "
             >
               {/* <ShoppingBagIcon className="h-4 text-white " /> */}
-              <p className="text-xs text-white pl-1 font-bold">
+              <p className="text-xs text-darkGray pl-1 font-bold">
                 {Math.round(price)} DA
               </p>
             </button>
+
+            <p className="text-xs truncate p-1">{title}</p>
           </div>
         </div>
       </Link>

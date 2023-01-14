@@ -9,7 +9,7 @@ function ProductsDisplay({ products }) {
   const [enabled, setEnabled] = useState(true);
   return (
     <div className=" flex flex-col items-center  md:py-5">
-      <div className="grid grid-cols-2 gap-2 md:grid-cols-2 lg:grid-cols-5 xl:grid-cols-6  text-sx   px-10 md:px-40 -mt-20 ">
+      <div className="grid grid-cols-3 gap-2 md:grid-cols-2 lg:grid-cols-5 xl:grid-cols-6  text-sx   px-10 md:px-40 -mt-20 ">
         {enabled
           ? products
               .filter((product) => product.id < 13)

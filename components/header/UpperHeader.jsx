@@ -22,7 +22,7 @@ function UpperHeader() {
         href="/"
         className="order-1 col-span-6 md:col-span-2 text-greenSecondary font-bold text-3xl "
       >
-        TAAJ
+        FARID
       </Link>
       {/* search bar */}
       <div className=" mt-3 md:mt-0 order-last md:order-2 col-span-12 md:col-span-7 flex flex-row items-center relative overflow-hidden">

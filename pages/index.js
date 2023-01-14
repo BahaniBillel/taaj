@@ -42,9 +42,10 @@ export default function Home() {
       <main className="">
         <Hero />
         <ProductsDisplay products={productsDB} />
-        <EightGrids />
+        <EightGrids x1={5} />
         <TenGrids />
         <FourGridsCard />
+        <EightGrids x1={6} x2={1} />
       </main>
     </div>
   );

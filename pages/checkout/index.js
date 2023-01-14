@@ -3,15 +3,15 @@ import CheckoutHeader from "../../components/header/CheckoutHeader";
 
 function Checkout() {
   return (
-    <div className="h-[100vh] bg-lightEmerald ">
+    <div className=" md:bg-lightEmerald ">
       <CheckoutHeader />
-      <section className="flex flex-col items-center justify-center mt-10">
-        <form className="w-[800px] h-[560px] max-h-[650px] rounded-md shadow-md p-10 flex flex-col space-y-3 items-start bg-white">
-          <h1 className="text-5xl text-darkGray">
+      <section className="flex flex-col items-center justify-center mt-10 py-10 ">
+        <form className="  rounded-md md:shadow-md  flex flex-col space-y-3 items-start bg-white px-3 py-5">
+          <h1 className="text-2xl md:text-3xl text-darkGray font-semibold py-4">
             Enter your delivery address
           </h1>
           <div className="flex flex-col items-start space-y-1 w-full">
-            <label for="wilaya" className="font-semibold ">
+            <label for="wilaya" className="">
               Wilaya
             </label>
             <input
@@ -22,7 +22,7 @@ function Checkout() {
             />
           </div>
           <div className="flex flex-col items-start space-y-1 w-full">
-            <label for="fullname" className="font-semibold ">
+            <label for="fullname" className=" ">
               Full name
             </label>
             <input
@@ -34,7 +34,7 @@ function Checkout() {
           </div>
           <div className="flex flex-row items-center space-x-3 w-full">
             <div className="w-1/2">
-              <label for="Street adresse" className="font-semibold ">
+              <label for="Street adresse" className=" ">
                 Street address
               </label>
               <input
@@ -46,7 +46,7 @@ function Checkout() {
             </div>
             <div className="flex flex-grow"></div>
             <div className="w-1/2">
-              <label for="Flat/other" className="font-semibold ">
+              <label for="Flat/other" className="">
                 Flat/other
               </label>
               <input
@@ -59,7 +59,7 @@ function Checkout() {
           </div>
           <div className="flex flex-row items-center space-x-3 w-full">
             <div className="w-1/2">
-              <label for="City" className="font-semibold ">
+              <label for="City" className=" ">
                 City
               </label>
               <input
@@ -71,7 +71,7 @@ function Checkout() {
             </div>
             <div className="flex flex-grow"></div>
             <div className="w-1/2">
-              <label for="County" className="font-semibold ">
+              <label for="County" className=" ">
                 County
               </label>
               <input
@@ -83,7 +83,7 @@ function Checkout() {
             </div>
             <div className="flex flex-grow"></div>
             <div className="w-1/2">
-              <label for="Postal Code" className="font-semibold ">
+              <label for="Postal Code" className="">
                 Postal code
               </label>
               <input
